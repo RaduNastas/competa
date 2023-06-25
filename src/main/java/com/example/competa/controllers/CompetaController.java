@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,19 +25,15 @@ public class CompetaController {
         return "competa-main"; // вызывается шаблон
     }
 
-    @GetMapping ("/competa/add")  // переход на страницу
+    @GetMapping("/competa/add")  // переход на страницу
     public String competaAdd (Model model){
+        model.addAttribute("competa", new Competa());
         return "competa-add";  // вызывается шаблон
     }
 
     @PostMapping("/competa/add")
-    public String competaAdd(@RequestParam("competa_type") String competa_type, @RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("dateOut") @DateTimeFormat(pattern = "yyyy-mm-dd") Date dateOut, @RequestParam ("status") boolean status, Model model) {
-        Competa competa = new Competa(title, description, competa_type, dateOut, status);
-        competa.setTitel(title);
-        competa.setDescription(description);
-        competa.setCompeta_type(competa_type);
-        competa.setDateOut(dateOut);
-        competa.setStatus(status);
+    public String competaAdd(@ModelAttribute Competa competa, Model model) {
+        model.addAttribute("competa", new Competa());
         competaRepository.save(competa);
         return "redirect:/competa"; // переход на страницу
     }
