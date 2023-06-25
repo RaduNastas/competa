@@ -36,6 +36,12 @@ public class Competa {
     }
 
     public Competa(String title, String description, String competa_type, Date dateOut, boolean status) {
+        this.titel = titel;
+        this.description = description;
+        this.competa_type = competa_type;
+        this.status = status;
+        this.dateOut = dateOut;
+        this.status = status;
     }
 
     // конструктор пустой
