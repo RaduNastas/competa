@@ -13,7 +13,7 @@ public class Competa {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id; // идентификатор
     private String competa_type; // тип = ed-competa, job-competa, hs-competa, ss-competa
-    private String titel;
+    private String title;
     private String description;
     private boolean status;
     private int views;
@@ -24,10 +24,10 @@ public class Competa {
     // конструктор с полями
 
 
-    public Competa(Long id, String competa_type, String titel, String description, boolean status, int views, Date dateOut, String timeOut) {
+    public Competa(Long id, String competa_type, String title, String description, boolean status, int views, Date dateOut, String timeOut) {
         this.id = id;
         this.competa_type = competa_type;
-        this.titel = titel;
+        this.title = title;
         this.description = description;
         this.status = status;
         this.views = views;
@@ -36,7 +36,7 @@ public class Competa {
     }
 
     public Competa(String title, String description, String competa_type, Date dateOut, boolean status) {
-        this.titel = titel;
+        this.title = title;
         this.description = description;
         this.competa_type = competa_type;
         this.status = status;
@@ -81,7 +81,7 @@ public class Competa {
     }
 
     public Competa(String titel, String description) {
-        this.titel = titel;
+        this.title = title;
         this.description = description;
     }
 
@@ -93,12 +93,12 @@ public class Competa {
         this.id = id;
     }
 
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {

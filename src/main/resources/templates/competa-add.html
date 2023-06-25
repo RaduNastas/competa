@@ -13,6 +13,7 @@
     <h1> Are you about to add a new Competa? </h1>
     <br><br>
     <form action="#" th:action="@{/competa/add}" method="post" th:object="${competa}">
+<!--     связали форму с объектом competa-->
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="competa_type" id="inlineRadio1" value="Education"
                    th:field="*{competa_type}" required>
@@ -37,7 +38,7 @@
             <label class="form-check-label" for="inlineRadio3">Soft skill</label>
         </div>
         <br><br>
-        <input type="text" name="titel" placeholder="Input title" class="form-control" th:field="*{titel}" required><br>
+        <input type="text" name="title" placeholder="Input title" class="form-control" th:field="*{title}" required><br>
         <input type="text" name="description" placeholder="Input description" class="form-control"
                th:field="*{description}"><br>
         <!--            input data-->
@@ -55,7 +56,7 @@
 
         <div class="form-check">
             <input class="form-check-input" name="status" type="checkbox" value="true" id="defaultCheck1"
-                   th:field="*{status}">
+                   th:field="*{status}"> это поле для status
             <label class="form-check-label" for="defaultCheck1">
                 Public
             </label>

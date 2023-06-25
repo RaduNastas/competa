@@ -19,6 +19,7 @@ public class CompetaController {
     private CompetaRepository competaRepository;
 
     @GetMapping ("/competa") // переход на страницу
+    // здесь должны быть все Competas данного User, а пока просто все
     public String competaMain (Model model){
         Iterable<Competa> competas = competaRepository.findAll();
         model.addAttribute("competas", competas);
@@ -40,37 +41,34 @@ public class CompetaController {
 
     @GetMapping ("/competa/{id}")  // переход на страницу
     public String competaDetails (@PathVariable(value ="id") long id, Model model){
-        if(!competaRepository.existsById(id)){ // если не нашли в репозитории по id
-            return "redirect:/competa";//  вернулись на страницу
-        }
         Optional<Competa> competa = competaRepository.findById(id); // в классе Optional создали экземпляр
-        ArrayList<Competa> res = new ArrayList<>(); // поместили находку в ArrayList
-        competa.ifPresent(res::add); // перенесли объект
-        model.addAttribute("competa", res);
-        return "competa-details";
+        if (competa.isPresent()) {
+            model.addAttribute("competa", competa.get());
+            return "competa-details";
+        } else {
+            return "redirect:/competa";
+        }
     }
 
     @GetMapping("/competa/{id}/edit")
     public String competaEdit( @PathVariable(value = "id") long id, Model model) {
-        if(!competaRepository.existsById(id)){
+        Optional<Competa> competa = competaRepository.findById(id); // взяли "футляр"
+        if (competa.isPresent()) {  // если внутри "футляра" есть результат
+            model.addAttribute("competa", competa.get()); // взяли в model
+            return "competa-edit";
+        } else {
             return "redirect:/competa";
         }
-        Optional<Competa> competa = competaRepository.findById(id);
-        ArrayList<Competa> res = new ArrayList<>();
-        competa.ifPresent(res::add);
-        model.addAttribute("competa", res);
-        return "competa-edit";
     }
 
-    @PostMapping("/competa/{id}/edit")
-    public String competaUpdate(@PathVariable(value = "id") long id, @RequestParam ("competa_type") String competa_type, @RequestParam ("title") String title, @RequestParam("description") String description, @RequestParam("dateOut") @DateTimeFormat(pattern = "yyyy-mm-dd") Date dateOut, @RequestParam ("status") boolean status, Model model) {
-        Competa competa = competaRepository.findById(id).orElseThrow();
-        competa.setTitel(title);
-        competa.setDescription(description);
-        competa.setCompeta_type(competa_type);
-        competa.setDateOut(dateOut);
-        competa.setStatus(status);
-        competaRepository.save(competa);
+    @PostMapping ("/competa/{id}/edit") //
+    public String competaUpdate(@PathVariable(value = "id") long id, @ModelAttribute Competa competa){
+        Competa competaToEdit = competaRepository.findById(id).orElseThrow();
+        competaToEdit.setTitle(competa.getTitle()); // название
+        competaToEdit.setDescription(competa.getDescription()); // описание
+        competaToEdit.setDateOut(competa.getDateOut()); // дата
+        competaToEdit.setStatus(competa.isStatus()); // статус
+        competaRepository.save(competaToEdit); // сохраняем в репозитории
         return "redirect:/competa";
     }
 
