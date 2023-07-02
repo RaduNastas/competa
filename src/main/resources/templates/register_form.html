@@ -11,7 +11,7 @@
 <header th:insert="blocks/header" :: header></header>
 
 <div class="container mt-5 mb-5">
-    <h1> User registration form </h1>
+    <h1> User registration </h1>
     <form action="#" th:action="@{/register}" method="post" th:object="${user}">
         <label>Full name:</label>
         <input class="form-control" type="text" th:field="*{name}" /><br/>
