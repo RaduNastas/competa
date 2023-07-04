@@ -9,9 +9,9 @@
 </head>
 <body>
 <header th:insert="blocks/header" :: header></header>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+<!--<form th:action="@{/logout}" method="post">-->
+<!--    <input type="submit" value="Sign Out"/>-->
+<!--</form>-->
 <div class="container mt-5 mb-5">
     <h1> My Competa </h1>
     <div th:each="el:${competas}" class="alert alert-info mt-2">

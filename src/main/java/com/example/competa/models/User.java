@@ -11,7 +11,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // идентификатор
-    private String user_name;
+    private String username;
     private String password;
     private String name;
     private String surname;
@@ -34,11 +34,11 @@ public class User {
     }
 
     public String getUser_name() {
-        return user_name;
+        return username;
     }
 
     public void setUser_name(String user_name) {
-        this.user_name = user_name;
+        this.username = username;
     }
 
     public String getPassword() {
